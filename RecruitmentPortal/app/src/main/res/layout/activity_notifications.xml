@@ -27,7 +27,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Settings"
+                android:text="Notifications"
                 android:textColor="@color/text_primary"
                 android:textSize="22sp"
                 android:textStyle="bold" />
@@ -53,11 +53,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <include layout="@layout/item_settings_row" android:id="@+id/rowDarkMode" />
-                <include layout="@layout/item_settings_row" android:id="@+id/rowLanguage" />
-                <include layout="@layout/item_settings_row" android:id="@+id/rowNotifications" />
-                <include layout="@layout/item_settings_row" android:id="@+id/rowPrivacy" />
-                <include layout="@layout/item_settings_row" android:id="@+id/rowAbout" />
+                <!-- Mock Notifications -->
+                <include layout="@layout/item_notification_row" />
+                <include layout="@layout/item_notification_row" />
+                <include layout="@layout/item_notification_row" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

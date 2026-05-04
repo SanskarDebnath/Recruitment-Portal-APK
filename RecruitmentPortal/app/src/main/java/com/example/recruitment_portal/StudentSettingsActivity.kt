@@ -2,16 +2,21 @@ package com.example.recruitment_portal
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 
-class ProfileActivity : AppCompatActivity() {
+class StudentSettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
+        setContentView(R.layout.activity_student_settings)
 
-        // Handle back button using the modern OnBackPressedDispatcher
+        setupRow(R.id.rowEmailNotif, "Email Notifications")
+        setupRow(R.id.rowJobAlerts, "Job Alerts")
+        setupRow(R.id.rowChangePass, "Change Password")
+        setupRow(R.id.rowTwoStep, "Two-Step Verification")
+
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 closePage(null)
@@ -19,10 +24,11 @@ class ProfileActivity : AppCompatActivity() {
         })
     }
 
-    /**
-     * Closes the page with a slide-out-bottom animation.
-     * @param view The view that was clicked (optional).
-     */
+    private fun setupRow(id: Int, title: String) {
+        val row = findViewById<View>(id)
+        row.findViewById<TextView>(R.id.tvSettingTitle).text = title
+    }
+
     fun closePage(view: View?) {
         vibrate(30)
         finish()

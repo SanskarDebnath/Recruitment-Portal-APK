@@ -1,92 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="2dp">
+    android:layout_margin="12dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="#F1F5F9"
+    app:cardBackgroundColor="@color/surface">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:padding="14dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
 
-        <!-- Title Row (Always visible) -->
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/tvTitle"
-                android:text="Job Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/btnInfo"
+                android:text="Software Developer"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/btnInfo"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_toStartOf="@id/tvChevron"
+                android:layout_marginEnd="12dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_info_24"
+                app:tint="?attr/colorPrimary" />
 
             <TextView
                 android:id="@+id/tvChevron"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/chevron"
-                android:textSize="24sp"
-                android:textColor="#8E8E93"
-                android:rotation="90"/>
-        </LinearLayout>
+                android:layout_alignParentEnd="true"
+                android:text="›"
+                android:textColor="@color/text_secondary"
+                android:textSize="20sp" />
+        </RelativeLayout>
 
-        <!-- Expandable Content -->
         <LinearLayout
             android:id="@+id/layoutExpandable"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/tvDesc"
-                android:text="Description"
-                android:textSize="14sp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="Develop and maintain web applications using modern frameworks."
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp" />
 
-            <!-- Chips -->
             <com.google.android.material.chip.ChipGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="16dp">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipAge"
+                    style="@style/Widget.Material3.Chip.Assist"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Age"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"/>
+                    android:text="21-30"
+                    app:chipCornerRadius="8dp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipDept"
+                    style="@style/Widget.Material3.Chip.Assist"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dept"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"/>
+                    android:text="IT Dept"
+                    app:chipCornerRadius="8dp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipDate"
+                    style="@style/Widget.Material3.Chip.Assist"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dates"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"/>
-
+                    android:text="Aug 2026"
+                    app:chipCornerRadius="8dp" />
             </com.google.android.material.chip.ChipGroup>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnApply"
+                    style="@style/Widget.Material3.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:text="Apply Now"
+                    app:cornerRadius="12dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnViewDoc"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Details"
+                    app:cornerRadius="12dp" />
+            </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
-
 </com.google.android.material.card.MaterialCardView>

@@ -1,13 +1,35 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.RecruitmentPortal" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <!-- Base Orange Theme (Before Login) -->
+    <style name="Theme.RecruitmentPortal" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary_orange</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="colorPrimaryContainer">#FFEDD5</item>
+        <item name="colorOnPrimaryContainer">@color/primary_orange</item>
     </style>
 
-    <style name="Theme.RecruitmentPortal" parent="Base.Theme.RecruitmentPortal" />
+    <!-- Green Theme (After Login) -->
+    <style name="Theme.RecruitmentPortal.Dashboard" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary_green</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="colorPrimaryContainer">#D1FAE5</item>
+        <item name="colorOnPrimaryContainer">@color/primary_green</item>
+    </style>
+
     <style name="Theme.Transparent" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowBackground">#80000000</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="colorPrimary">@color/primary_orange</item>
+    </style>
+
+    <!-- Transparent Green Theme for Dashboard Overlays -->
+    <style name="Theme.Transparent.Dashboard" parent="Theme.Transparent">
+        <item name="colorPrimary">@color/primary_green</item>
     </style>
 </resources>

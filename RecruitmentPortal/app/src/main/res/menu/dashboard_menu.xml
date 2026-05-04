@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/dash_home"
+        android:title="Home"
+        android:icon="@drawable/ic_home_24"/>
+    <item
+        android:id="@+id/dash_activity"
+        android:title="Activity"
+        android:icon="@drawable/ic_work_24"/>
+    <item
+        android:id="@+id/dash_profile"
+        android:title="Profile"
+        android:icon="@drawable/ic_person_24"/>
+    <item
+        android:id="@+id/dash_settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings_24"/>
+</menu>

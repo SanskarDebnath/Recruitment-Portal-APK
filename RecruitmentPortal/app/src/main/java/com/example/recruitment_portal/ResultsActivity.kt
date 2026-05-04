@@ -5,13 +5,12 @@ import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 
-class ProfileActivity : AppCompatActivity() {
+class ResultsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
+        setContentView(R.layout.activity_results)
 
-        // Handle back button using the modern OnBackPressedDispatcher
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 closePage(null)
@@ -19,10 +18,6 @@ class ProfileActivity : AppCompatActivity() {
         })
     }
 
-    /**
-     * Closes the page with a slide-out-bottom animation.
-     * @param view The view that was clicked (optional).
-     */
     fun closePage(view: View?) {
         vibrate(30)
         finish()

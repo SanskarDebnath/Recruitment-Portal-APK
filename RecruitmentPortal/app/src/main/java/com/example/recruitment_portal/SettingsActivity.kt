@@ -24,6 +24,7 @@ class SettingsActivity : AppCompatActivity() {
      * @param view The view that was clicked (optional).
      */
     fun closePage(view: View?) {
+        vibrate(30)
         finish()
         overridePendingTransition(0, R.anim.slide_out_bottom)
     }

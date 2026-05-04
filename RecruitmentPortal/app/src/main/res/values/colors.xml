@@ -4,4 +4,20 @@
     <color name="white">#FFFFFFFF</color>
     <color name="chip_selected_bg">#E5F1FF</color>
     <color name="chip_stroke">#D1D1D6</color>
+    <color name="navy_blue">#1A237E</color>
+    <color name="flag_saffron">#FF9933</color>
+    <color name="flag_white">#FFFFFF</color>
+    <color name="flag_green">#138808</color>
+    <color name="orange_main">#FF5722</color>
+
+    <!-- Theme Colors -->
+    <color name="primary_orange">#F97316</color>
+    <color name="primary_green">#10B981</color>
+
+    <color name="background">#F8FAFC</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="text_primary">#1E293B</color>
+    <color name="text_secondary">#64748B</color>
+    <color name="accent">#F59E0B</color>
+    <color name="bottom_nav_bg">#FFFFFF</color>
 </resources>
