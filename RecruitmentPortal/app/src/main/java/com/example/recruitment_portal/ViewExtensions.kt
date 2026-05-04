@@ -43,3 +43,7 @@ fun Context.getThemeColor(attrRes: Int): Int {
     theme.resolveAttribute(attrRes, typedValue, true)
     return typedValue.data
 }
+
+fun Int.dpToPx(context: Context): Int {
+    return (this * context.resources.displayMetrics.density).toInt()
+}

@@ -25,27 +25,30 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // --- Typing Animation for Title with Tricolor ---
-        val tvMainTitle = findViewById<TextView>(R.id.tvMainTitle)
-        val fullText = "Recruitment Portal"
-        
-        lifecycleScope.launch {
-            tvMainTitle.text = ""
-            for (i in 1..fullText.length) {
-                val currentText = fullText.substring(0, i)
-                val spannable = SpannableStringBuilder(currentText)
-                
-                if (i <= 11) {
-                    spannable.setSpan(ForegroundColorSpan(getColor(R.color.flag_saffron)), 0, i, 0)
-                } else {
-                    spannable.setSpan(ForegroundColorSpan(getColor(R.color.flag_saffron)), 0, 11, 0)
-                    if (i > 12) {
-                        spannable.setSpan(ForegroundColorSpan(getColor(R.color.flag_green)), 12, i, 0)
+        // Initial loading animation (Before login)
+        startLoadingAnimation(2000) {
+            // --- Typing Animation for Title with Tricolor ---
+            val tvMainTitle = findViewById<TextView>(R.id.tvMainTitle)
+            val fullText = "Recruitment Portal"
+            
+            lifecycleScope.launch {
+                tvMainTitle.text = ""
+                for (i in 1..fullText.length) {
+                    val currentText = fullText.substring(0, i)
+                    val spannable = SpannableStringBuilder(currentText)
+                    
+                    if (i <= 11) {
+                        spannable.setSpan(ForegroundColorSpan(getColor(R.color.flag_saffron)), 0, i, 0)
+                    } else {
+                        spannable.setSpan(ForegroundColorSpan(getColor(R.color.flag_saffron)), 0, 11, 0)
+                        if (i > 12) {
+                            spannable.setSpan(ForegroundColorSpan(getColor(R.color.flag_green)), 12, i, 0)
+                        }
                     }
+                    
+                    tvMainTitle.text = spannable
+                    delay(120)
                 }
-                
-                tvMainTitle.text = spannable
-                delay(120)
             }
         }
 
@@ -116,10 +119,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         val mainScrollView = findViewById<NestedScrollView>(R.id.mainScrollView)
-        val fabScroll = findViewById<FloatingActionButton>(R.id.fabScroll)
+        val fabScroll = findViewById<View>(R.id.fabScroll)
+        val tvScrollLabel = findViewById<TextView>(R.id.tvScrollLabel)
+        val ivScrollIcon = findViewById<android.widget.ImageView>(R.id.ivScrollIcon)
         var isAtBottom = false
 
         fabScroll.setOnClickListener {
+            it.startClickAnimation()
             if (isAtBottom) {
                 mainScrollView.smoothScrollTo(0, 0)
             } else {
@@ -133,15 +139,51 @@ class MainActivity : AppCompatActivity() {
             if (scrollY + visibleHeight >= totalContentHeight - 10) { 
                 if (!isAtBottom) {
                     isAtBottom = true
-                    fabScroll.setImageResource(R.drawable.ic_chevron_up)
+                    tvScrollLabel.text = "Scroll up"
+                    ivScrollIcon.setImageResource(R.drawable.ic_chevron_up)
                 }
             } else {
                 if (isAtBottom) {
                     isAtBottom = false
-                    fabScroll.setImageResource(R.drawable.ic_chevron_down)
+                    tvScrollLabel.text = "Scroll down"
+                    ivScrollIcon.setImageResource(R.drawable.ic_chevron_down)
                 }
             }
         })
+    }
+
+    private fun startLoadingAnimation(durationMs: Long, onComplete: () -> Unit) {
+        val overlay = findViewById<View>(R.id.loadingOverlay)
+        val barFill = findViewById<View>(R.id.loadingBarFill)
+        val tvPercent = findViewById<TextView>(R.id.tvLoadingPercent)
+
+        overlay.visibility = View.VISIBLE
+        overlay.alpha = 1f
+
+        overlay.post {
+            val parentWidth = (barFill.parent as View).width
+            val animator = android.animation.ValueAnimator.ofFloat(0f, 1f)
+            animator.duration = durationMs
+            animator.interpolator = android.view.animation.AccelerateDecelerateInterpolator()
+            animator.addUpdateListener { animation ->
+                val progress = animation.animatedValue as Float
+                val params = barFill.layoutParams
+                params.width = (parentWidth * progress).toInt()
+                barFill.layoutParams = params
+                tvPercent.text = "${(progress * 100).toInt()}%"
+            }
+            animator.addListener(object : android.animation.AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: android.animation.Animator) {
+                    overlay.animate()
+                        .alpha(0f)
+                        .setDuration(400)
+                        .withEndAction { overlay.visibility = View.GONE }
+                        .start()
+                    onComplete()
+                }
+            })
+            animator.start()
+        }
     }
 
     private fun setupQuickService(id: Int, label: String, iconRes: Int, onClick: (View) -> Unit) {
@@ -170,10 +212,14 @@ class MainActivity : AppCompatActivity() {
             val password = etPassword.text.toString()
             if (email == "student@gmail.com" && password == "1234") {
                 SessionManager.isLoggedIn = true
-                NotificationHelper.showStackedNotification(findViewById(R.id.notificationStack), "Login Successful!")
                 dialog.dismiss()
-                val intent = Intent(this, DashboardActivity::class.java)
-                startActivity(intent)
+                
+                // 3 second loading animation after login
+                startLoadingAnimation(3000) {
+                    NotificationHelper.showStackedNotification(findViewById(R.id.notificationStack), "Login Successful!")
+                    val intent = Intent(this, DashboardActivity::class.java)
+                    startActivity(intent)
+                }
             } else {
                 Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show()
             }

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="1.5dp"
+    app:strokeColor="#F1F5F9"
+    app:cardBackgroundColor="#FDF2F2">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <ImageView
+            android:id="@+id/ivAdmitIcon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_profile_circle"
+            android:backgroundTint="#FEE2E2"
+            android:padding="12dp"
+            android:src="@drawable/ic_description_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#EF4444"
+            android:importantForAccessibility="no" />
+
+        <TextView
+            android:id="@+id/tvAdmitTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Data Analyst Exam"
+            android:textColor="@color/text_primary"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/btnDownloadAdmit"
+            app:layout_constraintStart_toEndOf="@+id/ivAdmitIcon"
+            app:layout_constraintTop_toTopOf="@+id/ivAdmitIcon" />
+
+        <TextView
+            android:id="@+id/tvExamDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Date: 25 June 2026"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvAdmitTitle"
+            app:layout_constraintStart_toStartOf="@+id/tvAdmitTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvAdmitTitle" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDownloadAdmit"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:backgroundTint="#FEE2E2"
+            app:icon="@drawable/ic_notifications_24"
+            app:iconSize="20dp"
+            app:iconTint="#EF4444"
+            app:layout_constraintBottom_toBottomOf="@+id/ivAdmitIcon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivAdmitIcon" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:alpha="0.3"
+            android:background="#EF4444"
+            app:layout_constraintTop_toBottomOf="@+id/ivAdmitIcon" />
+
+        <ImageView
+            android:id="@+id/ivLoc"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_location_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider"
+            app:tint="@color/text_secondary" />
+
+        <TextView
+            android:id="@+id/tvVenue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="Venue: Kolkata, Sector V"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivLoc"
+            app:layout_constraintEnd_toStartOf="@+id/tvRollNo"
+            app:layout_constraintStart_toEndOf="@+id/ivLoc"
+            app:layout_constraintTop_toTopOf="@+id/ivLoc" />
+
+        <TextView
+            android:id="@+id/tvRollNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Roll No: 20260451"
+            android:textColor="@color/text_primary"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tvVenue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvVenue" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

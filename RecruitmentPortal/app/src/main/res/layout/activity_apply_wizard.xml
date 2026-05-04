@@ -29,26 +29,36 @@
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="✕" android:textSize="20sp" android:padding="4dp" android:onClick="closeWizard"/>
         </RelativeLayout>
 
-        <!-- 7-Step Stepper -->
-        <HorizontalScrollView
+        <!-- Stepper Button Group -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="none"
-            android:layout_marginBottom="24dp">
-            <LinearLayout
-                android:layout_width="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="#F1F5F9"
+            app:cardBackgroundColor="#F8FAFC">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-                <include layout="@layout/item_step_indicator" android:id="@+id/step1" />
-                <include layout="@layout/item_step_indicator" android:id="@+id/step2" />
-                <include layout="@layout/item_step_indicator" android:id="@+id/step3" />
-                <include layout="@layout/item_step_indicator" android:id="@+id/step4" />
-                <include layout="@layout/item_step_indicator" android:id="@+id/step5" />
-                <include layout="@layout/item_step_indicator" android:id="@+id/step6" />
-                <include layout="@layout/item_step_indicator" android:id="@+id/step7" />
-            </LinearLayout>
-        </HorizontalScrollView>
+                android:scrollbars="none">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+                    <include layout="@layout/item_step_indicator" android:id="@+id/step1" />
+                    <include layout="@layout/item_step_indicator" android:id="@+id/step2" />
+                    <include layout="@layout/item_step_indicator" android:id="@+id/step3" />
+                    <include layout="@layout/item_step_indicator" android:id="@+id/step4" />
+                    <include layout="@layout/item_step_indicator" android:id="@+id/step5" />
+                    <include layout="@layout/item_step_indicator" android:id="@+id/step6" />
+                    <include layout="@layout/item_step_indicator" android:id="@+id/step7" />
+                </LinearLayout>
+            </HorizontalScrollView>
+        </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -98,21 +108,65 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Personal Information" android:textStyle="bold" android:textSize="16sp" android:layout_marginBottom="16dp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Personal Information" android:textStyle="bold" android:textSize="18sp" android:textColor="@color/text_primary" android:layout_marginBottom="20dp"/>
 
-                        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.Material3.TextInputLayout.OutlinedBox" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Father Name" android:layout_marginBottom="12dp">
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Father Name"
+                            android:layout_marginBottom="16dp"
+                            app:startIconDrawable="@drawable/ic_person_24"
+                            app:startIconTint="@color/text_secondary"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp">
                             <com.google.android.material.textfield.TextInputEditText android:layout_width="match_parent" android:layout_height="wrap_content"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.Material3.TextInputLayout.OutlinedBox" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Mother Name" android:layout_marginBottom="12dp">
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Mother Name"
+                            android:layout_marginBottom="16dp"
+                            app:startIconDrawable="@drawable/ic_person_24"
+                            app:startIconTint="@color/text_secondary"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp">
                             <com.google.android.material.textfield.TextInputEditText android:layout_width="match_parent" android:layout_height="wrap_content"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.Material3.TextInputLayout.OutlinedBox" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Guardian Name" android:layout_marginBottom="12dp">
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Guardian Name"
+                            android:layout_marginBottom="16dp"
+                            app:startIconDrawable="@drawable/ic_person_24"
+                            app:startIconTint="@color/text_secondary"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp">
                             <com.google.android.material.textfield.TextInputEditText android:layout_width="match_parent" android:layout_height="wrap_content"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.Material3.TextInputLayout.OutlinedBox" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Date of Birth" android:layout_marginBottom="12dp">
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Date of Birth"
+                            android:layout_marginBottom="16dp"
+                            app:startIconDrawable="@drawable/ic_info_24"
+                            app:startIconTint="@color/text_secondary"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp">
                             <com.google.android.material.textfield.TextInputEditText android:layout_width="match_parent" android:layout_height="wrap_content"/>
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>

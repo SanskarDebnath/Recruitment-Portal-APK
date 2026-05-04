@@ -40,18 +40,19 @@ class ApplyWizardActivity : AppCompatActivity() {
     }
 
     private fun setupStepper() {
-        setStep(R.id.step1, "Personal")
-        setStep(R.id.step2, "Address")
-        setStep(R.id.step3, "Education")
-        setStep(R.id.step4, "Experience")
-        setStep(R.id.step5, "Documents")
-        setStep(R.id.step6, "City")
-        setStep(R.id.step7, "Preview")
+        setStep(R.id.step1, "Personal", R.drawable.ic_person_24)
+        setStep(R.id.step2, "Address", R.drawable.ic_home_24)
+        setStep(R.id.step3, "Education", R.drawable.ic_info_24)
+        setStep(R.id.step4, "Experience", R.drawable.ic_work_24)
+        setStep(R.id.step5, "Documents", R.drawable.ic_notifications_24)
+        setStep(R.id.step6, "City", R.drawable.ic_search)
+        setStep(R.id.step7, "Preview", R.drawable.ic_settings_24)
     }
 
-    private fun setStep(id: Int, label: String) {
+    private fun setStep(id: Int, label: String, iconRes: Int) {
         val view = findViewById<View>(id)
         view.findViewById<TextView>(R.id.tvStepLabel).text = label
+        view.findViewById<android.widget.ImageView>(R.id.ivStepIcon).setImageResource(iconRes)
     }
 
     private fun updateUI() {

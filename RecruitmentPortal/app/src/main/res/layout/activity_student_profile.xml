@@ -28,21 +28,68 @@
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="✕" android:textSize="20sp" android:padding="4dp" android:onClick="closePage"/>
         </RelativeLayout>
 
-        <HorizontalScrollView
+        <!-- Profile Section Button Group -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:scrollbars="none">
-            <LinearLayout
-                android:layout_width="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="#F1F5F9"
+            app:cardBackgroundColor="#F8FAFC">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <Button android:id="@+id/btnSecPersonal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Personal" style="@style/Widget.Material3.Button.TextButton" android:textColor="?attr/colorPrimary"/>
-                <Button android:id="@+id/btnSecAddress" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Address" style="@style/Widget.Material3.Button.TextButton" android:textColor="@color/text_secondary"/>
-                <Button android:id="@+id/btnSecQualification" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Qualification" style="@style/Widget.Material3.Button.TextButton" android:textColor="@color/text_secondary"/>
-                <Button android:id="@+id/btnSecExperience" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Experience" style="@style/Widget.Material3.Button.TextButton" android:textColor="@color/text_secondary"/>
-            </LinearLayout>
-        </HorizontalScrollView>
+                android:scrollbars="none">
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/profileButtonGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    app:singleSelection="true"
+                    app:selectionRequired="true"
+                    app:checkedButton="@+id/btnSecPersonal">
+
+                    <Button
+                        android:id="@+id/btnSecPersonal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Personal"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        app:icon="@drawable/ic_person_24"
+                        android:layout_marginEnd="8dp"/>
+
+                    <Button
+                        android:id="@+id/btnSecAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Address"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        app:icon="@drawable/ic_home_24"
+                        android:layout_marginEnd="8dp"/>
+
+                    <Button
+                        android:id="@+id/btnSecQualification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Qualification"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        app:icon="@drawable/ic_info_24"
+                        android:layout_marginEnd="8dp"/>
+
+                    <Button
+                        android:id="@+id/btnSecExperience"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Experience"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        app:icon="@drawable/ic_work_24"/>
+
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+            </HorizontalScrollView>
+        </com.google.android.material.card.MaterialCardView>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
