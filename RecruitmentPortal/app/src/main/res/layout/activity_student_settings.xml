@@ -45,6 +45,12 @@
                 <include layout="@layout/item_settings_row" android:id="@+id/rowChangePass" />
                 <include layout="@layout/item_settings_row" android:id="@+id/rowTwoStep" />
 
+                <TextView android:text="Privacy &amp; Support" android:textStyle="bold" android:layout_marginTop="24dp" android:layout_marginBottom="12dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                <include layout="@layout/item_settings_row" android:id="@+id/rowPrivacyPolicy" />
+                <include layout="@layout/item_settings_row" android:id="@+id/rowTermsOfService" />
+                <include layout="@layout/item_settings_row" android:id="@+id/rowHelpSupport" />
+                <include layout="@layout/item_settings_row" android:id="@+id/rowAboutApp" />
+
                 <Button
                     android:id="@+id/btnDeactivate"
                     android:layout_width="match_parent"

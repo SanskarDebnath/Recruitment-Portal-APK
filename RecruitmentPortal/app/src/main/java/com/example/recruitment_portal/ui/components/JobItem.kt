@@ -12,20 +12,26 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.recruitment_portal.Job
+import com.example.recruitment_portal.vibrate
 
 @Composable
-fun JobItem(job: Job, onApplyClick: () -> Unit = {}, onDetailsClick: () -> Unit = {}) {
+fun JobItem(job: Job, onApplyClick: () -> Unit = {}, onDetailsClick: () -> Unit = {}, onInfoClick: () -> Unit = {}) {
+    val context = LocalContext.current
     var expanded by remember { mutableStateOf(false) }
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 12.dp, vertical = 8.dp)
-            .clickable { expanded = !expanded },
+            .clickable { 
+                context.vibrate(30)
+                expanded = !expanded 
+            },
         shape = MaterialTheme.shapes.extraLarge,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
@@ -49,7 +55,10 @@ fun JobItem(job: Job, onApplyClick: () -> Unit = {}, onDetailsClick: () -> Unit 
                     modifier = Modifier.weight(1f)
                 )
                 
-                IconButton(onClick = { /* Info action */ }) {
+                IconButton(onClick = { 
+                    context.vibrate(30)
+                    onInfoClick() 
+                }) {
                     Icon(
                         imageVector = Icons.Default.Info,
                         contentDescription = "Info",
@@ -80,7 +89,7 @@ fun JobItem(job: Job, onApplyClick: () -> Unit = {}, onDetailsClick: () -> Unit 
                     ) {
                         AssistChip(
                             onClick = { },
-                            label = { Text(job.ageLimit) }
+                            label = { Text(job.age) }
                         )
                         AssistChip(
                             onClick = { },
@@ -99,14 +108,20 @@ fun JobItem(job: Job, onApplyClick: () -> Unit = {}, onDetailsClick: () -> Unit 
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Button(
-                            onClick = onApplyClick,
+                            onClick = {
+                                context.vibrate(30)
+                                onApplyClick()
+                            },
                             modifier = Modifier.weight(1f),
                             shape = MaterialTheme.shapes.medium
                         ) {
                             Text("Apply Now")
                         }
                         ElevatedButton(
-                            onClick = onDetailsClick,
+                            onClick = {
+                                context.vibrate(30)
+                                onDetailsClick()
+                            },
                             modifier = Modifier.weight(1f),
                             shape = MaterialTheme.shapes.medium
                         ) {

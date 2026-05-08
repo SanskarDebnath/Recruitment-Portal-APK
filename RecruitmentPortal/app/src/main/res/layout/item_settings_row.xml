@@ -4,10 +4,20 @@
     android:layout_height="64dp"
     android:orientation="horizontal"
     android:gravity="center_vertical"
-    android:paddingHorizontal="4dp"
+    android:paddingHorizontal="16dp"
     android:clickable="true"
     android:focusable="true"
     android:background="?attr/selectableItemBackground">
+
+    <ImageView
+        android:id="@+id/ivSettingIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_settings_24"
+        android:importantForAccessibility="no"
+        app:tint="@color/text_secondary"
+        xmlns:app="http://schemas.android.com/apk/res-auto"/>
 
     <TextView
         android:id="@+id/tvSettingTitle"
@@ -18,7 +28,14 @@
         android:textColor="@color/text_primary"
         android:textSize="16sp" />
 
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/switchSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
     <TextView
+        android:id="@+id/tvArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="›"

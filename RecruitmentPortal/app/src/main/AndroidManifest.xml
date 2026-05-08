@@ -39,6 +39,7 @@
         <activity android:name=".ApplyWizardActivity" android:theme="@style/Theme.Transparent.Dashboard" android:exported="false" />
         <activity android:name=".StudentProfileActivity" android:theme="@style/Theme.Transparent.Dashboard"/>
         <activity android:name=".StudentSettingsActivity" android:theme="@style/Theme.Transparent.Dashboard"/>
+        <activity android:name=".StatsDetailActivity" android:theme="@style/Theme.Transparent.Dashboard"/>
     </application>
 
 </manifest>

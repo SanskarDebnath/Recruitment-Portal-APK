@@ -10,10 +10,11 @@
         android:layout_height="match_parent"
         android:layout_marginTop="80dp"
         android:layout_gravity="bottom"
-        android:background="@drawable/bg_settings_card"
+        android:background="@drawable/bg_bottom_sheet_rounded"
         android:orientation="vertical"
         android:elevation="20dp"
-        android:padding="18dp">
+        android:paddingTop="12dp"
+        android:paddingHorizontal="24dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,29 +53,30 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="1dp"
-                    app:strokeColor="#E0E0E0"
-                    android:layout_marginBottom="12dp">
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="0dp"
+                    android:layout_marginBottom="16dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:padding="20dp">
 
                         <TextView
                             android:text="Junior Engineer (Civil)"
-                            android:textSize="16sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
+                            android:textColor="@color/text_primary"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
                         <TextView
                             android:text="Total Vacancies: 150"
-                            android:textSize="12sp"
-                            android:textColor="#888888"
+                            android:textSize="13sp"
+                            android:textColor="@color/text_secondary"
+                            android:layout_marginTop="4dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -82,13 +84,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:layout_marginTop="12dp"
+                            android:layout_marginTop="16dp"
                             android:gravity="center_vertical">
 
                             <TextView
                                 android:text="Last Date: 25 Aug 2026"
-                                android:textSize="14sp"
-                                android:textColor="#F44336"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                android:background="#FEE2E2"
+                                android:textColor="#EF4444"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="4dp"
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"/>
@@ -96,10 +102,12 @@
                             <Button
                                 android:id="@+id/btnApply1"
                                 android:layout_width="wrap_content"
-                                android:layout_height="40dp"
+                                android:layout_height="44dp"
                                 android:text="Apply Now"
+                                android:layout_marginStart="16dp"
+                                app:cornerRadius="12dp"
                                 style="@style/Widget.Material3.Button"
-                                android:paddingHorizontal="16dp"/>
+                                android:paddingHorizontal="20dp"/>
                         </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -107,29 +115,30 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="1dp"
-                    app:strokeColor="#E0E0E0"
-                    android:layout_marginBottom="12dp">
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="0dp"
+                    android:layout_marginBottom="16dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:padding="20dp">
 
                         <TextView
                             android:text="Assistant Manager (HR)"
-                            android:textSize="16sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
+                            android:textColor="@color/text_primary"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
                         <TextView
                             android:text="Total Vacancies: 20"
-                            android:textSize="12sp"
-                            android:textColor="#888888"
+                            android:textSize="13sp"
+                            android:textColor="@color/text_secondary"
+                            android:layout_marginTop="4dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -137,13 +146,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:layout_marginTop="12dp"
+                            android:layout_marginTop="16dp"
                             android:gravity="center_vertical">
 
                             <TextView
                                 android:text="Last Date: 05 Sep 2026"
-                                android:textSize="14sp"
-                                android:textColor="#F44336"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                android:background="#FEE2E2"
+                                android:textColor="#EF4444"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="4dp"
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"/>
@@ -151,10 +164,12 @@
                             <Button
                                 android:id="@+id/btnApply2"
                                 android:layout_width="wrap_content"
-                                android:layout_height="40dp"
+                                android:layout_height="44dp"
                                 android:text="Apply Now"
+                                android:layout_marginStart="16dp"
+                                app:cornerRadius="12dp"
                                 style="@style/Widget.Material3.Button"
-                                android:paddingHorizontal="16dp"/>
+                                android:paddingHorizontal="20dp"/>
                         </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>

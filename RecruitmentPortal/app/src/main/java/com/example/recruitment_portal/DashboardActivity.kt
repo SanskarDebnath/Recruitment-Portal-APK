@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class DashboardActivity : AppCompatActivity() {
@@ -17,8 +20,7 @@ class DashboardActivity : AppCompatActivity() {
 
         findViewById<View>(R.id.btnLogout).setOnClickListener {
             it.startClickAnimation()
-            SessionManager.isLoggedIn = false
-            finish()
+            showLogoutConfirmation()
         }
 
         findViewById<View>(R.id.btnNotifications).setOnClickListener {
@@ -34,6 +36,7 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         setupAppClicks()
+        setupOngoingApplications()
         setupToggles()
         setupScrollListener()
 
@@ -101,13 +104,42 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun setupAppClicks() {
-        findViewById<View>(R.id.app1)?.setOnClickListener { it.startClickAnimation(); showMilestoneModal() }
-        findViewById<View>(R.id.app2)?.setOnClickListener { it.startClickAnimation(); showMilestoneModal() }
         findViewById<View>(R.id.admit1)?.setOnClickListener { it.startClickAnimation(); showMilestoneModal() }
         
         findViewById<View>(R.id.btnResumeDraft)?.setOnClickListener {
             it.startClickAnimation()
-            Toast.makeText(this, "Resuming Draft...", Toast.LENGTH_SHORT).show()
+            showCustomSnackbar(it, "Resuming Draft...")
+        }
+
+        findViewById<View>(R.id.btnProfileMeter)?.setOnClickListener {
+            it.startClickAnimation()
+            startActivity(Intent(this, StudentProfileActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_bottom, 0)
+        }
+
+        findViewById<View>(R.id.btnMockTests)?.setOnClickListener {
+            it.startClickAnimation()
+            showComingSoonDialog("Mock Tests", "Unlock 100+ Free Practice Tests for SSC & UPSC.")
+        }
+
+        findViewById<View>(R.id.btnJoinMeeting)?.setOnClickListener {
+            it.startClickAnimation()
+            showCustomSnackbar(it, "Opening Meeting Link...")
+        }
+
+        findViewById<View>(R.id.btnDigitalLocker)?.setOnClickListener {
+            it.startClickAnimation()
+            showComingSoonDialog("Digital Locker", "Your e-verified documents will appear here.")
+        }
+
+        findViewById<View>(R.id.btnHelpDesk)?.setOnClickListener {
+            it.startClickAnimation()
+            showComingSoonDialog("Help Desk", "Our team is available 24/7. Ticket system coming soon.")
+        }
+
+        findViewById<View>(R.id.btnRefer)?.setOnClickListener {
+            it.startClickAnimation()
+            showCustomSnackbar(it, "Referral link copied to clipboard!")
         }
 
         val resultCard = findViewById<View>(R.id.result1)
@@ -121,6 +153,37 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
+    private fun showComingSoonDialog(title: String, message: String) {
+        com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton("Explore later", null)
+            .show()
+    }
+
+    private fun showCustomSnackbar(view: View, message: String) {
+        val snackbar = com.google.android.material.snackbar.Snackbar.make(view, message, com.google.android.material.snackbar.Snackbar.LENGTH_SHORT)
+        snackbar.setBackgroundTint(getColor(R.color.orange_main))
+        snackbar.setTextColor(getColor(R.color.white))
+        snackbar.show()
+    }
+
+    private fun showLogoutConfirmation() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_stats_info, null) // reuse for simple dialog or builder
+        com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+            .setTitle("Confirm Logout")
+            .setMessage("Are you sure you want to log out of your account?")
+            .setPositiveButton("Logout") { _, _ ->
+                val root = findViewById<View>(android.R.id.content)
+                root.animate().alpha(0f).setDuration(300).withEndAction {
+                    SessionManager.isLoggedIn = false
+                    finish()
+                }.start()
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
     private fun showResultDetailModal() {
         val dialog = com.google.android.material.bottomsheet.BottomSheetDialog(this)
         val view = layoutInflater.inflate(R.layout.dialog_result_details, null)
@@ -132,7 +195,7 @@ class DashboardActivity : AppCompatActivity() {
         }
         view.findViewById<View>(R.id.btnDownloadScorecard).setOnClickListener {
             it.startClickAnimation()
-            Toast.makeText(this, "Scorecard downloading...", Toast.LENGTH_SHORT).show()
+            showCustomSnackbar(view, "Scorecard downloading...")
             dialog.dismiss()
         }
         dialog.show()
@@ -143,6 +206,16 @@ class DashboardActivity : AppCompatActivity() {
         val layoutPie = findViewById<View>(R.id.layoutPieChart)
         val layoutBar = findViewById<View>(R.id.layoutBarChart)
 
+        val openStatsDetail = View.OnClickListener {
+            it.startClickAnimation()
+            val intent = Intent(this, StatsDetailActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_bottom, 0)
+        }
+
+        layoutPie.setOnClickListener(openStatsDetail)
+        layoutBar.setOnClickListener(openStatsDetail)
+
         chartToggle.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
                 this.vibrate(20)
@@ -152,7 +225,8 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         val ongoingToggle = findViewById<com.google.android.material.button.MaterialButtonToggleGroup>(R.id.ongoingToggle)
-        val gridOngoing = findViewById<android.widget.GridLayout>(R.id.gridOngoing)
+        val rvOngoingList = findViewById<RecyclerView>(R.id.rvOngoingList)
+        val vpOngoingStack = findViewById<ViewPager2>(R.id.vpOngoingStack)
 
         ongoingToggle.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
@@ -168,33 +242,34 @@ class DashboardActivity : AppCompatActivity() {
                 listBtn.iconTint = if (checkedId == R.id.btnOngoingList) activeColor else inactiveColor
                 gridBtn.iconTint = if (checkedId == R.id.btnOngoingGrid) activeColor else inactiveColor
 
-                gridOngoing.post {
-                    try {
-                        val isGrid = checkedId == R.id.btnOngoingGrid
-                        
-                        for (i in 0 until gridOngoing.childCount) {
-                            val child = gridOngoing.getChildAt(i)
-                            val lp = android.widget.GridLayout.LayoutParams()
-                            lp.height = android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-                            
-                            if (isGrid) {
-                                lp.width = 0
-                                lp.columnSpec = android.widget.GridLayout.spec(android.widget.GridLayout.UNDEFINED, 1, 1f)
-                                // In grid, use horizontal margin for spacing between columns
-                                val margin = 8.dpToPx(this@DashboardActivity)
-                                lp.setMargins(margin, margin, margin, margin)
-                            } else {
-                                lp.width = android.view.ViewGroup.LayoutParams.MATCH_PARENT
-                                lp.columnSpec = android.widget.GridLayout.spec(android.widget.GridLayout.UNDEFINED, 1, 1f)
-                                lp.setMargins(0, 0, 0, 16.dpToPx(this@DashboardActivity))
+                val isGrid = checkedId == R.id.btnOngoingGrid
+                
+                rvOngoingList.visibility = if (isGrid) View.GONE else View.VISIBLE
+                vpOngoingStack.visibility = if (isGrid) View.VISIBLE else View.GONE
+
+                if (isGrid && vpOngoingStack.adapter?.itemCount ?: 0 > 1) {
+                    vpOngoingStack.postDelayed({
+                        try {
+                            vpOngoingStack.beginFakeDrag()
+                            val animator = android.animation.ValueAnimator.ofFloat(0f, -120f, 0f)
+                            animator.duration = 450
+                            var previousValue = 0f
+                            animator.addUpdateListener { animation ->
+                                val currentValue = animation.animatedValue as Float
+                                val diff = currentValue - previousValue
+                                vpOngoingStack.fakeDragBy(diff)
+                                previousValue = currentValue
                             }
-                            child.layoutParams = lp
+                            animator.addListener(object : android.animation.AnimatorListenerAdapter() {
+                                override fun onAnimationEnd(animation: android.animation.Animator) {
+                                    vpOngoingStack.endFakeDrag()
+                                }
+                            })
+                            animator.start()
+                        } catch (e: Exception) {
+                            // Ignore fake drag errors
                         }
-                        gridOngoing.columnCount = if (isGrid) 2 else 1
-                        gridOngoing.requestLayout()
-                    } catch (e: Exception) {
-                        android.util.Log.e("Dashboard", "Error switching views", e)
-                    }
+                    }, 300)
                 }
             }
         }
@@ -202,6 +277,52 @@ class DashboardActivity : AppCompatActivity() {
         findViewById<View>(R.id.btnStatsInfo).setOnClickListener {
             it.startClickAnimation()
             showStatsInfoModal()
+        }
+    }
+
+    private fun setupOngoingApplications() {
+        val dummyData = listOf(
+            OngoingApp("Software Developer", getString(R.string.interview_scheduled), 75, "Next: Technical Interview", R.drawable.ic_work_24, "#2563EB", "#EFF6FF"),
+            OngoingApp("Data Analyst", "Assessment Pending", 40, "Next: Online Test", R.drawable.ic_chart_pie_24, "#1D4ED8", "#DBEAFE"),
+            OngoingApp("UI/UX Designer", "Portfolio Reviewed", 60, "Next: HR Round", R.drawable.ic_view_list_24, "#701A75", "#FDF4FF")
+        )
+
+        val rvOngoingList = findViewById<RecyclerView>(R.id.rvOngoingList)
+        val vpOngoingStack = findViewById<ViewPager2>(R.id.vpOngoingStack)
+
+        rvOngoingList.layoutManager = LinearLayoutManager(this)
+        rvOngoingList.adapter = OngoingAdapter(dummyData, false)
+
+        vpOngoingStack.adapter = OngoingAdapter(dummyData, true)
+        vpOngoingStack.offscreenPageLimit = 3
+        vpOngoingStack.setPageTransformer(StackPageTransformer())
+
+        // Pagination controls
+        val btnPrevPage = findViewById<View>(R.id.btnPrevPage)
+        val btnNextPage = findViewById<View>(R.id.btnNextPage)
+        val tvPageIndicator = findViewById<TextView>(R.id.tvPageIndicator)
+        
+        var currentPage = 1
+        val maxPage = 3
+        
+        btnPrevPage?.setOnClickListener {
+            it.startClickAnimation()
+            if (currentPage > 1) {
+                currentPage--
+                tvPageIndicator?.text = "Page $currentPage of $maxPage"
+                rvOngoingList.adapter = OngoingAdapter(dummyData.shuffled(), false)
+                vpOngoingStack.adapter = OngoingAdapter(dummyData.shuffled(), true)
+            }
+        }
+        
+        btnNextPage?.setOnClickListener {
+            it.startClickAnimation()
+            if (currentPage < maxPage) {
+                currentPage++
+                tvPageIndicator?.text = "Page $currentPage of $maxPage"
+                rvOngoingList.adapter = OngoingAdapter(dummyData.shuffled(), false)
+                vpOngoingStack.adapter = OngoingAdapter(dummyData.shuffled(), true)
+            }
         }
     }
 

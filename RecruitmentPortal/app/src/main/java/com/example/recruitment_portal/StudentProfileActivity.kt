@@ -29,8 +29,9 @@ class StudentProfileActivity : AppCompatActivity() {
         val btnAddress = findViewById<Button>(R.id.btnSecAddress)
         val btnQualification = findViewById<Button>(R.id.btnSecQualification)
         val btnExperience = findViewById<Button>(R.id.btnSecExperience)
+        val btnDocuments = findViewById<Button>(R.id.btnSecDocuments)
 
-        val buttons = listOf(btnPersonal, btnAddress, btnQualification, btnExperience)
+        val buttons = listOf(btnPersonal, btnAddress, btnQualification, btnExperience, btnDocuments)
 
         btnPersonal.setOnClickListener {
             updateTabStyle(btnPersonal, buttons)
@@ -51,12 +52,25 @@ class StudentProfileActivity : AppCompatActivity() {
             updateTabStyle(btnExperience, buttons)
             setupExperienceFields()
         }
+
+        btnDocuments.setOnClickListener {
+            updateTabStyle(btnDocuments, buttons)
+            setupDocuments()
+        }
     }
 
     private fun updateTabStyle(selected: Button, all: List<Button>) {
         selected.startClickAnimation()
-        all.forEach { it.setTextColor(getColor(R.color.text_secondary)) }
-//        selected.setTextColor(getThemeColor(com.google.android.material.R.attr.colorPrimary))
+        all.forEach { 
+            (it as? com.google.android.material.button.MaterialButton)?.let { mb ->
+                mb.setTextColor(getColor(R.color.text_secondary))
+                mb.iconTint = android.content.res.ColorStateList.valueOf(getColor(R.color.text_secondary))
+            }
+        }
+        (selected as? com.google.android.material.button.MaterialButton)?.let { mb ->
+            mb.setTextColor(getColor(R.color.primary_green))
+            mb.iconTint = android.content.res.ColorStateList.valueOf(getColor(R.color.primary_green))
+        }
     }
 
     private fun setupFields(sectionTitle: String) {
@@ -97,6 +111,16 @@ class StudentProfileActivity : AppCompatActivity() {
         setField(R.id.fieldMarital, "LOCATION", "Bangalore")
         setField(R.id.fieldGender, "NOTICE PERIOD", "30 Days")
         setField(R.id.fieldDOB, "PREV CTC", "12 LPA")
+    }
+
+    private fun setupDocuments() {
+        findViewById<TextView>(R.id.tvSectionTitle).text = "Uploaded Documents"
+        setField(R.id.fieldFather, "ADHAR CARD", "Verified ✓")
+        setField(R.id.fieldMother, "PAN CARD", "Verified ✓")
+        setField(R.id.fieldGuardian, "10TH MARKSHEET", "Uploaded")
+        setField(R.id.fieldMarital, "12TH MARKSHEET", "Uploaded")
+        setField(R.id.fieldGender, "DEGREE", "Pending")
+        setField(R.id.fieldDOB, "SIGNATURE", "Uploaded")
     }
 
     private fun setField(id: Int, label: String, value: String) {

@@ -56,10 +56,11 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:layout_alignParentEnd="true"
-                            android:src="@drawable/ic_search"
+                            android:src="@drawable/ic_close_24"
                             app:tint="@color/text_secondary"
                             android:onClick="closePage"
                             android:padding="4dp"
+                            android:importantForAccessibility="no"
                             android:background="?attr/selectableItemBackgroundBorderless"/>
                     </RelativeLayout>
 
@@ -88,7 +89,7 @@
                                 android:textStyle="bold"
                                 android:textColor="@color/primary_green"/>
 
-                            <Box
+                            <FrameLayout
                                 android:layout_width="160dp"
                                 android:layout_height="160dp"
                                 android:layout_marginTop="16dp">
@@ -123,7 +124,7 @@
                                     android:textSize="28sp"
                                     android:textStyle="bold"
                                     android:textColor="@color/text_primary"/>
-                            </Box>
+                            </FrameLayout>
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 

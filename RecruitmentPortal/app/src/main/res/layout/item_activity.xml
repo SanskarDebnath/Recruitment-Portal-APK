@@ -7,17 +7,123 @@
     app:cardCornerRadius="20dp"
     app:cardElevation="0dp"
     app:strokeWidth="1.5dp"
-    app:strokeColor="#F1F5F9">
+    app:strokeColor="#F1F5F9"
+    app:cardBackgroundColor="@color/white">
 
+    <!-- LIST VIEW CONTAINER -->
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:visibility="visible">
 
         <ImageView
-            android:id="@+id/ivActivityIcon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:id="@+id/ivActivityIconList"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_profile_circle"
+            android:backgroundTint="#EFF6FF"
+            android:padding="12dp"
+            android:src="@drawable/ic_work_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:tint="?attr/colorPrimary"
+            android:importantForAccessibility="no" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintStart_toEndOf="@id/ivActivityIconList"
+            app:layout_constraintEnd_toStartOf="@id/progressContainerList"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvActivityTitleList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Software Developer"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:id="@+id/tvActivityStatusList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/interview_scheduled"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:id="@+id/tvNextStepList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Next: Technical Interview"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/progressContainerList"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/tvProgressPercentList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="75%"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/activityProgressList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:progress="75"
+                app:indicatorColor="?attr/colorPrimary"
+                app:trackColor="#E2E8F0"
+                app:trackCornerRadius="4dp"
+                app:trackThickness="6dp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- GRID VIEW CONTAINER -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutGrid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/ivActivityIconGrid"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
             android:background="@drawable/bg_profile_circle"
             android:backgroundTint="#EFF6FF"
             android:padding="10dp"
@@ -28,76 +134,79 @@
             android:importantForAccessibility="no" />
 
         <TextView
-            android:id="@+id/tvActivityTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="4dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="Software Developer"
-            android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/tvProgressPercent"
-            app:layout_constraintStart_toEndOf="@+id/ivActivityIcon"
-            app:layout_constraintTop_toTopOf="@+id/ivActivityIcon" />
-
-        <TextView
-            android:id="@+id/tvActivityStatus"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@string/interview_scheduled"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="11sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/tvActivityTitle"
-            app:layout_constraintStart_toStartOf="@+id/tvActivityTitle"
-            app:layout_constraintTop_toBottomOf="@+id/tvActivityTitle" />
-
-        <TextView
-            android:id="@+id/tvProgressPercent"
+            android:id="@+id/tvProgressPercentGrid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="75%"
-            android:textColor="@color/text_secondary"
-            android:textSize="11sp"
+            android:textColor="@color/text_primary"
+            android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/tvActivityTitle"
+            android:background="@drawable/bg_profile_circle"
+            android:backgroundTint="#F8FAFC"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvActivityTitle" />
+            app:layout_constraintTop_toTopOf="@+id/ivActivityIconGrid"
+            app:layout_constraintBottom_toBottomOf="@+id/ivActivityIconGrid" />
+
+        <TextView
+            android:id="@+id/tvActivityTitleGrid"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Software Developer"
+            android:textColor="@color/text_primary"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivActivityIconGrid" />
+
+        <TextView
+            android:id="@+id/tvActivityStatusGrid"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/interview_scheduled"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvActivityTitleGrid" />
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
-            android:id="@+id/activityProgress"
+            android:id="@+id/activityProgressGrid"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:progress="75"
+            app:indicatorColor="?attr/colorPrimary"
+            app:trackColor="#E2E8F0"
+            app:trackCornerRadius="4dp"
+            app:trackThickness="6dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvActivityStatusGrid" />
+
+        <TextView
+            android:id="@+id/tvNextStepGrid"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:progress="75"
-            app:indicatorColor="?attr/colorPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivActivityIcon"
-            app:trackColor="#E2E8F0"
-            app:trackCornerRadius="4dp"
-            app:trackThickness="6dp" />
-
-        <TextView
-            android:id="@+id/tvNextStep"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ellipsize="end"
-            android:maxLines="1"
             android:text="Next: Technical Interview"
             android:textColor="@color/text_secondary"
-            android:textSize="11sp"
-            android:textStyle="italic"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="12sp"
+            android:maxLines="1"
+            android:ellipsize="end"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activityProgress" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activityProgressGrid" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </com.google.android.material.card.MaterialCardView>

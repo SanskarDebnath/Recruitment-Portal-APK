@@ -1,143 +1,289 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#80000000">
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="64dp"
-        android:layout_gravity="bottom"
-        android:background="@drawable/bg_settings_card"
-        android:orientation="vertical"
-        android:padding="24dp">
-
-        <View
-            android:layout_width="40dp"
-            android:layout_height="4dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="24dp"
-            android:background="#E2E8F0"/>
+        android:layout_marginTop="56dp"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="24dp"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerTop"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="My Profile" android:textSize="22sp" android:textStyle="bold" android:textColor="@color/text_primary"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="✕" android:textSize="20sp" android:padding="4dp" android:onClick="closePage"/>
-        </RelativeLayout>
-
-        <!-- Profile Section Button Group -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="#F1F5F9"
-            app:cardBackgroundColor="#F8FAFC">
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none">
-                <com.google.android.material.button.MaterialButtonToggleGroup
-                    android:id="@+id/profileButtonGroup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    app:singleSelection="true"
-                    app:selectionRequired="true"
-                    app:checkedButton="@+id/btnSecPersonal">
-
-                    <Button
-                        android:id="@+id/btnSecPersonal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Personal"
-                        style="@style/Widget.Material3.Button.TonalButton"
-                        app:icon="@drawable/ic_person_24"
-                        android:layout_marginEnd="8dp"/>
-
-                    <Button
-                        android:id="@+id/btnSecAddress"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Address"
-                        style="@style/Widget.Material3.Button.TextButton"
-                        app:icon="@drawable/ic_home_24"
-                        android:layout_marginEnd="8dp"/>
-
-                    <Button
-                        android:id="@+id/btnSecQualification"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Qualification"
-                        style="@style/Widget.Material3.Button.TextButton"
-                        app:icon="@drawable/ic_info_24"
-                        android:layout_marginEnd="8dp"/>
-
-                    <Button
-                        android:id="@+id/btnSecExperience"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Experience"
-                        style="@style/Widget.Material3.Button.TextButton"
-                        app:icon="@drawable/ic_work_24"/>
-
-                </com.google.android.material.button.MaterialButtonToggleGroup>
-            </HorizontalScrollView>
-        </com.google.android.material.card.MaterialCardView>
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="16dp">
+            android:background="@color/white">
 
-            <LinearLayout
-                android:id="@+id/profileContentArea"
+            <!-- Content Area -->
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:layout_above="@+id/bottomActionsBar"
+                android:clipToPadding="false"
+                android:paddingBottom="24dp">
 
-                <com.google.android.material.card.MaterialCardView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="1dp"
-                    app:strokeColor="#F1F5F9">
+                    android:orientation="vertical">
 
+                    <!-- Drag Handle -->
+                    <View
+                        android:layout_width="40dp"
+                        android:layout_height="4dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="12dp"
+                        android:background="#E2E8F0"/>
+
+                    <!-- Header -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="24dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="My Profile"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary"/>
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/ic_close_24"
+                            app:tint="@color/text_secondary"
+                            android:onClick="closePage"
+                            android:padding="4dp"
+                            android:importantForAccessibility="no"
+                            android:background="?attr/selectableItemBackgroundBorderless"/>
+                    </RelativeLayout>
+
+                    <!-- Profile Info Header -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:gravity="center"
+                        android:paddingBottom="24dp">
 
-                        <TextView android:id="@+id/tvSectionTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Personal Information" android:textStyle="bold" android:textSize="16sp" android:layout_marginBottom="20dp"/>
+                        <FrameLayout
+                            android:layout_width="110dp"
+                            android:layout_height="110dp">
+                            <ImageView
+                                android:id="@+id/ivProfilePhoto"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_person_24"
+                                android:background="@drawable/bg_profile_circle"
+                                android:backgroundTint="#EFF6FF"
+                                android:padding="24dp"
+                                app:tint="#2563EB"/>
 
-                        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="20dp">
-                            <ImageView android:id="@+id/ivProfilePhoto" android:layout_width="80dp" android:layout_height="80dp" android:src="@drawable/ic_person_24" android:background="@drawable/bg_profile_circle" android:padding="16dp"/>
-                            <TextView android:layout_toEndOf="@id/ivProfilePhoto" android:layout_marginStart="16dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="FULL NAME" android:textSize="10sp" android:textColor="@color/text_secondary"/>
-                            <TextView android:layout_toEndOf="@id/ivProfilePhoto" android:layout_marginStart="16dp" android:layout_marginTop="14dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SANSKAR DEBNATH" android:textStyle="bold" android:textSize="16sp"/>
-                        </RelativeLayout>
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:layout_gravity="bottom|end"
+                                app:cardCornerRadius="18dp"
+                                app:cardElevation="4dp"
+                                app:strokeWidth="3dp"
+                                app:strokeColor="@color/white">
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_settings_24"
+                                    android:padding="8dp"
+                                    android:background="#2563EB"
+                                    app:tint="@color/white"/>
+                            </com.google.android.material.card.MaterialCardView>
+                        </FrameLayout>
 
-                        <GridLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:columnCount="2">
-                            <include layout="@layout/item_profile_field" android:id="@+id/fieldFather"/>
-                            <include layout="@layout/item_profile_field" android:id="@+id/fieldMother"/>
-                            <include layout="@layout/item_profile_field" android:id="@+id/fieldGuardian"/>
-                            <include layout="@layout/item_profile_field" android:id="@+id/fieldMarital"/>
-                            <include layout="@layout/item_profile_field" android:id="@+id/fieldGender"/>
-                            <include layout="@layout/item_profile_field" android:id="@+id/fieldDOB"/>
-                        </GridLayout>
+                        <TextView
+                            android:id="@+id/tvProfileName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sanskar Debnath"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="12dp"
+                            android:textColor="@color/text_primary"/>
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="student@gmail.com"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_secondary"/>
                     </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
 
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+                    <!-- Section Tabs -->
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:paddingHorizontal="16dp"
+                        android:paddingBottom="16dp">
 
-    </LinearLayout>
-</FrameLayout>
+                        <com.google.android.material.button.MaterialButtonToggleGroup
+                            android:id="@+id/profileButtonGroup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:singleSelection="true"
+                            app:selectionRequired="true"
+                            app:checkedButton="@+id/btnSecPersonal">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnSecPersonal"
+                                style="@style/Widget.Material3.Button.TonalButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Personal"
+                                android:layout_marginEnd="8dp"
+                                app:cornerRadius="20dp"
+                                app:icon="@drawable/ic_person_24"/>
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnSecAddress"
+                                style="@style/Widget.Material3.Button.TextButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Address"
+                                android:layout_marginEnd="8dp"
+                                app:cornerRadius="20dp"
+                                app:icon="@drawable/ic_home_24"/>
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnSecQualification"
+                                style="@style/Widget.Material3.Button.TextButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Education"
+                                android:layout_marginEnd="8dp"
+                                app:cornerRadius="20dp"
+                                app:icon="@drawable/ic_education_24"/>
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnSecExperience"
+                                style="@style/Widget.Material3.Button.TextButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Work"
+                                android:layout_marginEnd="8dp"
+                                app:cornerRadius="20dp"
+                                app:icon="@drawable/ic_work_24"/>
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnSecDocuments"
+                                style="@style/Widget.Material3.Button.TextButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Docs"
+                                app:cornerRadius="20dp"
+                                app:icon="@drawable/ic_description_24"/>
+                        </com.google.android.material.button.MaterialButtonToggleGroup>
+                    </HorizontalScrollView>
+
+                    <!-- Details Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        app:cardCornerRadius="24dp"
+                        app:cardElevation="4dp"
+                        app:strokeWidth="0dp"
+                        app:cardBackgroundColor="@color/white">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="20dp">
+
+                            <TextView
+                                android:id="@+id/tvSectionTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Personal Information"
+                                android:textStyle="bold"
+                                android:textSize="18sp"
+                                android:textColor="#2563EB"
+                                android:layout_marginBottom="16dp"/>
+
+                            <GridLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:columnCount="2"
+                                android:alignmentMode="alignMargins"
+                                android:columnOrderPreserved="false">
+
+                                <include layout="@layout/item_profile_field" android:id="@+id/fieldFather" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1"/>
+                                <include layout="@layout/item_profile_field" android:id="@+id/fieldMother" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1"/>
+                                <include layout="@layout/item_profile_field" android:id="@+id/fieldGuardian" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1"/>
+                                <include layout="@layout/item_profile_field" android:id="@+id/fieldMarital" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1"/>
+                                <include layout="@layout/item_profile_field" android:id="@+id/fieldGender" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1"/>
+                                <include layout="@layout/item_profile_field" android:id="@+id/fieldDOB" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1"/>
+                            </GridLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+            <!-- Sticky Bottom Actions Bar -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/bottomActionsBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                app:cardElevation="16dp"
+                app:cardCornerRadius="0dp"
+                app:cardBackgroundColor="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="0dp"
+                        android:layout_height="54dp"
+                        android:layout_weight="1"
+                        android:text="Edit Profile"
+                        android:textColor="@color/white"
+                        app:backgroundTint="@color/primary_green"
+                        app:icon="@drawable/ic_person_24"
+                        app:cornerRadius="16dp"
+                        android:textStyle="bold"/>
+
+                    <View android:layout_width="12dp" android:layout_height="0dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:padding="0dp"
+                        android:insetLeft="0dp"
+                        android:insetRight="0dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        app:icon="@drawable/ic_description_24"
+                        app:iconGravity="textStart"
+                        app:iconPadding="0dp"
+                        app:cornerRadius="16dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
